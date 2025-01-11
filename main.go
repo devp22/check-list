@@ -4,16 +4,16 @@ import (
 	"fmt"
 )
 
-var taskItems = []string{"Read Book","Clean House","Get Groceries"}
 func main() {
+	var taskItems = []string{"Read Book","Clean House","Get Groceries"}
 
 	fmt.Println("################ Welcome to Checklist App ################")
 	fmt.Println()
-	printTasks()
+	printTasks(taskItems)
 
 }
 
-func printTasks(){
+func printTasks(taskItems []string){
 
 	for index, task := range taskItems {
 		fmt.Println(index ,". ",task)
