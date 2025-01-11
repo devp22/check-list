@@ -7,15 +7,21 @@ import (
 func main() {
 	var taskItems = []string{"Read Book","Clean House","Get Groceries"}
 
-	fmt.Println("################ Welcome to Checklist App ################")
-	fmt.Println()
-	printTasks(taskItems)
-
+	printTasks(taskItems,"################ Welcome to Checklist App ################")
+	taskItems = addTask(taskItems,"Go for a run")
+	printTasks(taskItems,"######### Updated List #########")
 }
 
-func printTasks(taskItems []string){
+func printTasks(taskItems []string, header string){
 
+	fmt.Println(header)
 	for index, task := range taskItems {
-		fmt.Println(index ,". ",task)
+		fmt.Printf("%d. %s\n",index+1,task)
 	}
+}
+
+func addTask(taskItems []string, newTask string) ([]string) {
+	var updatedTaskItems = append(taskItems, newTask)
+	fmt.Println("Task added successfully :)")
+	return updatedTaskItems
 }
