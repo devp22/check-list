@@ -2,14 +2,29 @@ package main
 
 import (
 	"fmt"
+	"net/http"
 )
+var taskItems = []string{"Read Book","Clean House","Get Groceries"}
 
 func main() {
-	var taskItems = []string{"Read Book","Clean House","Get Groceries"}
+	//creating an http server endpoint
 
-	printTasks(taskItems,"################ Welcome to Checklist App ################")
-	taskItems = addTask(taskItems,"Go for a run")
-	printTasks(taskItems,"######### Updated List #########")
+	http.HandleFunc("/",greet)
+	http.HandleFunc("/show",showTasks)
+
+	http.ListenAndServe(":8080",nil) // first param is to specify port of server, second is to specify what if it did not worked (then 'nil', means do nothing)
+
+}
+
+func greet(w http.ResponseWriter, r *http.Request) {
+	var message = "############## Welcome to to-do list app ##############"
+	fmt.Fprintf(w,"%s", message)
+}
+
+func showTasks(w http.ResponseWriter, r *http.Request) {
+	for index, task := range taskItems {
+		fmt.Fprintf(w,"%d. %s\n",index+1,task)
+	}
 }
 
 func printTasks(taskItems []string, header string){
